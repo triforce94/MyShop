@@ -1,4 +1,4 @@
-namespace MyShop.DataAccess.SQL.Migrations
+﻿namespace MyShop.DataAccess.SQL.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
