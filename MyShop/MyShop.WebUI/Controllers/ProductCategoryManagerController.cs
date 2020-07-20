@@ -1,5 +1,4 @@
-﻿using MyShop.Core;
-using MyShop.Core.Contracts;
+﻿using MyShop.Core.Contracts;
 using MyShop.Core.Models;
 using MyShop.DataAccess.InMemory;
 using System;
@@ -18,12 +17,11 @@ namespace MyShop.WebUI.Controllers
         {
             this.context = context;
         }
-
         // GET: ProductManager
         public ActionResult Index()
         {
-            List<ProductCategory> productsCategories = context.Collection().ToList();
-            return View(productsCategories);
+            List<ProductCategory> productCategories = context.Collection().ToList();
+            return View(productCategories);
         }
 
         public ActionResult Create()
@@ -46,6 +44,7 @@ namespace MyShop.WebUI.Controllers
 
                 return RedirectToAction("Index");
             }
+
         }
 
         public ActionResult Edit(string Id)
@@ -65,6 +64,7 @@ namespace MyShop.WebUI.Controllers
         public ActionResult Edit(ProductCategory product, string Id)
         {
             ProductCategory productCategoryToEdit = context.Find(Id);
+
             if (productCategoryToEdit == null)
             {
                 return HttpNotFound();
@@ -111,6 +111,7 @@ namespace MyShop.WebUI.Controllers
             else
             {
                 context.Delete(Id);
+                context.Commit();
                 return RedirectToAction("Index");
             }
         }

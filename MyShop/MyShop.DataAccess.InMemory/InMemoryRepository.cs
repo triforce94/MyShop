@@ -15,12 +15,10 @@ namespace MyShop.DataAccess.InMemory
         List<T> items;
         string className;
 
-        public InMemoryRepository()
-        {
+        public InMemoryRepository() {
             className = typeof(T).Name;
             items = cache[className] as List<T>;
-            if (items == null)
-            {
+            if (items == null) {
                 items = new List<T>();
             }
         }
@@ -30,46 +28,38 @@ namespace MyShop.DataAccess.InMemory
             cache[className] = items;
         }
 
-        public void Insert(T t)
-        {
+        public void Insert(T t) {
             items.Add(t);
         }
 
-        public void Update(T t)
-        {
+        public void Update(T t) {
             T tToUpdate = items.Find(i => i.Id == t.Id);
 
             if (tToUpdate != null)
             {
                 tToUpdate = t;
             }
-            else
-            {
-                throw new Exception(className + " not found");
+            else {
+                throw new Exception(className + " Not found");
             }
         }
 
-        public T Find(string Id)
-        {
+        public T Find(string Id) {
             T t = items.Find(i => i.Id == Id);
-
-            if (t != null)
-            {
+            if (t != null) {
                 return t;
             }
             else
             {
-                throw new Exception(className + " not found");
+                throw new Exception(className + " Not found");
             }
         }
 
-        public IQueryable<T> Collection()
-        {
+        public IQueryable<T> Collection() {
             return items.AsQueryable();
         }
 
-        public void Delete(string Id)
-        {
+        public void Delete(string Id) {
             T tToDelete = items.Find(i => i.Id == Id);
 
             if (tToDelete != null)
@@ -78,8 +68,9 @@ namespace MyShop.DataAccess.InMemory
             }
             else
             {
-                throw new Exception(className + " not found");
+                throw new Exception(className + " Not found");
             }
         }
+
     }
 }
